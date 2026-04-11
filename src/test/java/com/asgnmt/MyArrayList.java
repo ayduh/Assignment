@@ -1,14 +1,16 @@
 package com.asgnmt;
 
-public class MyArrayList
+public class MyArrayList<T>
 {
-    int a;
+    private Object[] array;
+    private int size = 0;
+    private int capacity = 6;
 
-    public MyArrayList(){
-        a = 2;
+    public MyArrayList() {
+        array = new Object[capacity];
     }
-    
-    static void getter(){
-        System.out.println("Salam");
+
+    public T get(int index){
+        return (T) array
     }
 }
