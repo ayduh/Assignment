@@ -1,11 +1,9 @@
 package com.asgnmt;
 
-public class AppTest{
+public class MyArrayListTest{
     public static void main( String[] args ){
         MyArrayList<Integer> b = new MyArrayList();
 
-        b.add(2);
-        System.out.println(b.getFirst());
-        System.out.println(b.getLast());
+        b.set(6, 2);
     }
 }
