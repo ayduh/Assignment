@@ -7,7 +7,7 @@ public class MyArrayList<T> implements MyListInter<T>{
 
     public MyArrayList() {array = new Object[capacity];}
 
-    public void addSpace(){
+    private void addSpace(){
         capacity *= 1.5;
         Object[] newArray = new Object[capacity];
 
