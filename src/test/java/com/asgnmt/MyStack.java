@@ -20,8 +20,9 @@ public class MyStack<T> {
     // Remove the last and return (pop)
     public T pop(){
         if (list.size() == 0){throw new IndexOutOfBoundsException();}
+        T lastItem = list.getLast();
         list.removeLast();
-        return list.getLast();
+        return lastItem;
     }
 
     // Return the last element
