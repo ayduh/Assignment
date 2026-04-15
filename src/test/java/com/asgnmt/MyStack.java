@@ -4,7 +4,7 @@ package com.asgnmt;
 // LIFO: Last In First Out
 public class MyStack<T> {
     
-    // Backing data structure - using ArrayList
+    // Stack data structure using ArrayList
     private MyArrayList<T> list;
 
     // Constructor initialize empty stack
@@ -16,3 +16,27 @@ public class MyStack<T> {
     public void push(T item) {
         list.addLast(item);
     }
+
+    // Remove the last and return (pop)
+    public T pop(){
+        if (list.size() == 0){throw new IndexOutOfBoundsException();}
+        list.removeLast();
+        return list.getLast();
+    }
+
+    // Return the last element
+    public T peek(){
+        if (list.size() == 0){throw new IndexOutOfBoundsException();}
+        return list.getLast();
+    }
+
+    // Return the size of the array
+    public int size(){
+        return list.size();
+    }
+
+    // Check if stack is empty
+    public boolean empty(){
+        return list.size() == 0;
+    }
+}
