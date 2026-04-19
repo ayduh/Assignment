@@ -38,14 +38,7 @@ public class MyArrayListTest {
             System.out.print(arr[i] + " ");
         }
         System.out.println();
-
-        System.out.print("iterator: ");
-        java.util.Iterator<Integer> it = list.iterator();
-        while (it.hasNext()) {
-            System.out.print(it.next() + " ");
-        }
-        System.out.println();
-
+        
         list.remove(2);
         System.out.println("after remove(2) size: " + list.size() + " get(2): " + list.get(2));
 

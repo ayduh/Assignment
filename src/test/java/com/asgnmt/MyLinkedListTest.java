@@ -62,15 +62,7 @@ public class MyLinkedListTest {
         intList.sort();
         System.out.print("After sort:  ");
         printList(intList); // Expected: [1, 3, 5, 8]
-
-        // Test Iterator
-        System.out.print("\n9. Iterator test: ");
-        java.util.Iterator<Integer> it = intList.iterator();
-        while (it.hasNext()) {
-            System.out.print(it.next() + " ");
-        }
-        System.out.println();
-
+        
         // Edge Cases & Exceptions
         System.out.println("\n10. Edge Cases:");
         try { list.get(5); } catch (IndexOutOfBoundsException e) {

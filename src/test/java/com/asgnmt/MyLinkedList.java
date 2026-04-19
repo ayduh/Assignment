@@ -1,6 +1,5 @@
 package com.asgnmt;
 
-import java.util.Iterator;
 
 public class MyLinkedList<T> implements MyListInter<T> {
     
@@ -10,9 +9,15 @@ public class MyLinkedList<T> implements MyListInter<T> {
     private Node<T> tail;
     //Number of elements currently in the list
     private int size;
+    
+    // Constructs an empty doubly linked list
+    public MyLinkedList() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
 
      //Private inner class representing a node in the doubly linked list
-
     private static class Node<E> {
         E data;
         Node<E> next;
@@ -23,13 +28,6 @@ public class MyLinkedList<T> implements MyListInter<T> {
             this.next = null;
             this.prev = null;
         }
-    }
-
-    // Constructs an empty doubly linked list
-    public MyLinkedList() {
-        head = null;
-        tail = null;
-        size = 0;
     }
 
     // Appends the specified element to the end of this list
@@ -59,7 +57,8 @@ public class MyLinkedList<T> implements MyListInter<T> {
         Node<T> newNode = new Node<>(item);
         if (tail == null) {
             head = tail = newNode;
-        } else {
+        } 
+        else {
             tail.next = newNode;
             newNode.prev = tail;
             tail = newNode;
@@ -78,11 +77,9 @@ public class MyLinkedList<T> implements MyListInter<T> {
         }
         if (index == 0) {
             addFirst(item);
-            return;
         }
         if (index == size) {
             addLast(item);
-            return;
         }
 
         Node<T> newNode = new Node<>(item);
@@ -96,6 +93,27 @@ public class MyLinkedList<T> implements MyListInter<T> {
         current.prev = newNode;
         size++;
         enforceListBoundaries();
+    }
+
+    // Helper method to retrieve a node at a specific index.
+    // Optimized to traverse from head or tail depending on which is closer
+    private Node<T> getNode(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<T> current;
+        if (index < size / 2) {
+            current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+        } else {
+            current = tail;
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+        }
+        return current;
     }
 
     // Replaces the element at the specified position with the specified element
@@ -274,61 +292,8 @@ public class MyLinkedList<T> implements MyListInter<T> {
             i = i.next;
         }
     }
-    // Returns an iterator over the elements in this list in proper sequence
-    @Override
-    public Iterator<T> iterator() {
-        return new LinkedListIterator();
-    }
 
-    private class LinkedListIterator implements Iterator<T> {
-        private Node<T> current = head;
-
-        @Override
-        public boolean hasNext() {
-            return current != null;
-        }
-
-        @Override
-        public T next() {
-            if (!hasNext()) {
-                throw new IllegalStateException("No more elements");
-            }
-            T data = current.data;
-            current = current.next;
-            return data;
-        }
-
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException("Remove not supported by this iterator");
-        }
-    }
-
-     // Helper method to retrieve a node at a specific index.
-     // Optimized to traverse from head or tail depending on which is closer
-    private Node<T> getNode(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-        Node<T> current;
-        if (index < size / 2) {
-            current = head;
-            for (int i = 0; i < index; i++) {
-                current = current.next;
-            }
-        } else {
-            current = tail;
-            for (int i = size - 1; i > index; i--) {
-                current = current.prev;
-            }
-        }
-        return current;
-    }
-
-     //How is loop prevented:
-     //enforces strict boundary conditions after every modification in structure
-     //guarantees that head.prev == null and tail.next == null preventing
-     //accidental circular references that could cause infinite loops when traversing
+     //loop prevention
     private void enforceListBoundaries() {
         if (head != null) head.prev = null;
         if (tail != null) tail.next = null;

@@ -1,6 +1,6 @@
 package com.asgnmt;
 
-public interface MyListInter<T> extends Iterable<T> {
+public interface MyListInter<T>{
     void add(T item);
     void set(int index, T item);
     void add(int index, T item);

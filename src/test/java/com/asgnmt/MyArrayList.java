@@ -53,7 +53,7 @@ public class MyArrayList<T> implements MyListInter<T>{
         array[index] = item;
     };
 
-    // shifts every existing element one position to the right, and places the new item at index 
+    // shifts every existing element one position to the right, and places the new item at index 0
     @Override
     public void addFirst(T item){
         if (size == capacity) {addSpace();}
@@ -121,14 +121,14 @@ public class MyArrayList<T> implements MyListInter<T>{
     @Override
     public void sort(){
         for(int i = 0; i < size - 1; i++){
-            int min = i;
+            int minIndex = i;
             for(int j = i + 1; j < size; j++){
-                if(((Comparable) array[j]).compareTo(array[min]) < 0){min = j;}
+                if(((Comparable) array[j]).compareTo(array[minIndex]) < 0){minIndex = j;}
             }
 
             Object t = array[i]; 
-            array[i] = array[min]; 
-            array[min] = t;
+            array[i] = array[minIndex];
+            array[minIndex] = t;
         }
     }
 
@@ -178,18 +178,5 @@ public class MyArrayList<T> implements MyListInter<T>{
     @Override
     public int size(){
         return size;
-    }
-
-    // Returns an anonymous Iterator<T> that tracks position with a counter c. 
-    // hasNext() checks c < size, next() returns and increments c, 
-    // and remove() throws UnsupportedOperationException.
-    @Override
-    public java.util.Iterator<T> iterator(){
-        return new java.util.Iterator<T>(){
-            int c = 0;
-            public boolean hasNext(){return c < size;}
-            public T next(){return (T) array[c++];}
-            public void remove(){throw new UnsupportedOperationException();}
-        };
     }
 }
